@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '6E9DD4F82064480AB67F476B'
+               BlueprintIdentifier = 'F7670439329C869CAC79D7F0'
                BlueprintName = 'SearchEmojiOnString'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libSearchEmojiOnString.a'>

@@ -6,7 +6,10 @@ pod 'SVProgressHUD'
 pod 'Bolts'
 
 #Production pod
-pod 'QMChatViewController'
+pod 'SDWebImage'
+
+#Production pod
+pod 'TTTAttributedLabel'
 
 #Production pod
 pod 'QMServices'

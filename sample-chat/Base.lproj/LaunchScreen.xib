@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,31 +11,32 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="s7W-lw-hEo">
-                    <rect key="frame" x="227" y="521" width="145" height="39"/>
-                    <animations/>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.png" translatesAutoresizingMaskIntoConstraints="NO" id="44m-LX-z19">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat Sample" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="zkm-Op-2OL">
-                    <rect key="frame" x="230" y="286" width="140" height="28"/>
-                    <animations/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_icon_launch.png" translatesAutoresizingMaskIntoConstraints="NO" id="kiO-V9-C1Z">
+                    <rect key="frame" x="225" y="225" width="150" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="BJe-N9-rcq"/>
+                        <constraint firstAttribute="height" constant="150" id="EFZ-Oh-STo"/>
+                    </constraints>
+                </imageView>
             </subviews>
-            <animations/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="centerY" secondItem="zkm-Op-2OL" secondAttribute="centerY" id="AEt-u3-hGG"/>
-                <constraint firstAttribute="bottom" secondItem="s7W-lw-hEo" secondAttribute="bottom" constant="40" id="AOH-is-WWz"/>
-                <constraint firstAttribute="centerX" secondItem="s7W-lw-hEo" secondAttribute="centerX" id="roX-yM-mLP"/>
-                <constraint firstAttribute="centerX" secondItem="zkm-Op-2OL" secondAttribute="centerX" id="xXU-a1-CkB"/>
+                <constraint firstAttribute="bottom" secondItem="44m-LX-z19" secondAttribute="bottom" id="DNe-vv-8MC"/>
+                <constraint firstAttribute="trailing" secondItem="44m-LX-z19" secondAttribute="trailing" id="LGJ-6L-Zof"/>
+                <constraint firstItem="kiO-V9-C1Z" firstAttribute="centerX" secondItem="8IA-9G-4Au" secondAttribute="centerX" id="SyM-pM-jja"/>
+                <constraint firstItem="kiO-V9-C1Z" firstAttribute="centerY" secondItem="8IA-9G-4Au" secondAttribute="centerY" id="UbZ-My-gvi"/>
+                <constraint firstItem="44m-LX-z19" firstAttribute="leading" secondItem="8IA-9G-4Au" secondAttribute="leading" id="nFb-yX-NHf"/>
+                <constraint firstItem="44m-LX-z19" firstAttribute="top" secondItem="8IA-9G-4Au" secondAttribute="top" id="tij-0x-dW2"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <point key="canvasLocation" x="501" y="381"/>
         </view>
     </objects>
     <resources>
-        <image name="logo" width="145" height="39"/>
+        <image name="app_icon_launch.png" width="150" height="150"/>
+        <image name="background.png" width="312" height="620"/>
     </resources>
 </document>

@@ -5,42 +5,6 @@ PODS:
   - Bolts/AppLinks (1.7.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.7.0)
-  - QMChatViewController (0.3.8):
-    - QMChatViewController/Categories (= 0.3.8)
-    - QMChatViewController/KeyboardViewController (= 0.3.8)
-    - QMChatViewController/Protocols (= 0.3.8)
-    - QMChatViewController/Sections (= 0.3.8)
-    - QMChatViewController/Utils (= 0.3.8)
-    - QMChatViewController/Views (= 0.3.8)
-    - QuickBlox (>= 2.0)
-    - SDWebImage (~> 3.6)
-    - TTTAttributedLabel (> 1.13)
-  - QMChatViewController/Categories (0.3.8):
-    - QuickBlox (>= 2.0)
-    - SDWebImage (~> 3.6)
-    - TTTAttributedLabel (> 1.13)
-  - QMChatViewController/KeyboardViewController (0.3.8):
-    - QuickBlox (>= 2.0)
-    - SDWebImage (~> 3.6)
-    - TTTAttributedLabel (> 1.13)
-  - QMChatViewController/Protocols (0.3.8):
-    - QuickBlox (>= 2.0)
-    - SDWebImage (~> 3.6)
-    - TTTAttributedLabel (> 1.13)
-  - QMChatViewController/Sections (0.3.8):
-    - QuickBlox (>= 2.0)
-    - SDWebImage (~> 3.6)
-    - TTTAttributedLabel (> 1.13)
-  - QMChatViewController/Utils (0.3.8):
-    - QuickBlox (>= 2.0)
-    - SDWebImage (~> 3.6)
-    - TTTAttributedLabel (> 1.13)
-  - QMChatViewController/Views (0.3.8):
-    - QMChatViewController/Categories
-    - QMChatViewController/Protocols
-    - QuickBlox (>= 2.0)
-    - SDWebImage (~> 3.6)
-    - TTTAttributedLabel (> 1.13)
   - QMServices (0.4.2):
     - Bolts (>= 1.5.0)
     - QuickBlox (>= 2.6.5)
@@ -54,14 +18,14 @@ PODS:
 
 DEPENDENCIES:
   - Bolts
-  - QMChatViewController
   - QMServices
+  - SDWebImage
   - SearchEmojiOnString
   - SVProgressHUD
+  - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
-  QMChatViewController: 0bc5d9af5464488b492eb1ec25d037dec213c3a3
   QMServices: 887df517a4b74f2944e67df992451c8ccf25cd84
   QuickBlox: 28720ddcb52d43879e2732f04c72900e38937cca
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
