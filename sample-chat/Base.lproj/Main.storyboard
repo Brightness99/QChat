@@ -140,7 +140,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H9v-f7-E6n" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Hqn-vo-8LC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2185" y="570"/>
+            <point key="canvasLocation" x="1779.5" y="569.5"/>
         </scene>
         <!--Chat-->
         <scene sceneID="LtF-Ct-8zW">
@@ -317,7 +317,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ShA-Zq-H2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1001.5" y="569.5"/>
+            <point key="canvasLocation" x="940.5" y="569.5"/>
         </scene>
         <!--Select Gender View Controller-->
         <scene sceneID="B0n-1A-2m2">
@@ -359,7 +359,6 @@
                                 </state>
                                 <connections>
                                     <action selector="startBtnClick:" destination="fhn-GM-5u0" eventType="touchUpInside" id="Erm-nt-fQh"/>
-                                    <segue destination="rkf-Gp-YH3" kind="show" id="Rsy-H1-J1H"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M4Z-04-uWV">
@@ -432,6 +431,7 @@
                         <outlet property="femaleLabel" destination="diU-3B-hGr" id="DAd-By-CL3"/>
                         <outlet property="maleLabel" destination="t9Q-IS-PSR" id="CLf-4p-jlm"/>
                         <outlet property="startLabel" destination="OCD-pg-pYs" id="Pg2-Af-d03"/>
+                        <segue destination="USy-AC-nck" kind="show" identifier="goToDialogs" id="u39-sU-3gq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IQq-6e-0ot" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -558,12 +558,12 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Chat Sample" id="PRM-QZ-rXP"/>
                     <connections>
-                        <segue destination="USy-AC-nck" kind="show" identifier="goToDialogs" id="MXH-uZ-40K"/>
+                        <segue destination="USy-AC-nck" kind="show" identifier="goToDialogs22" id="MXH-uZ-40K"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x7d-eE-m0H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1510" y="570"/>
+            <point key="canvasLocation" x="1361.5" y="569.5"/>
         </scene>
         <!--Select opponents-->
         <scene sceneID="SEZ-eL-gUQ">
@@ -784,5 +784,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="htm-nF-U3k"/>
+        <segue reference="MXH-uZ-40K"/>
     </inferredMetricsTieBreakers>
 </document>

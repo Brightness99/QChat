@@ -10,4 +10,5 @@
 
 @interface SelectGenderViewController : UIViewController
 
+@property (weak, nonatomic) QBUUser *user;
 @end

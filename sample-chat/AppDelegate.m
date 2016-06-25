@@ -10,9 +10,9 @@
 #import "ServicesManager.h"
 #import "ChatViewController.h"
 
-const NSUInteger kApplicationID = 28783;
-NSString *const kAuthKey        = @"b5bVGCHHv6rcAmD";
-NSString *const kAuthSecret     = @"ySwEpardeE7ZXHB";
+const NSUInteger kApplicationID = 42469;
+NSString *const kAuthKey        = @"6TcaCPVgfJFhegm";
+NSString *const kAuthSecret     = @"7UqLcJwKVVwFWWW";
 NSString *const kAccountKey     = @"7yvNe17TnjNUqDoPwfqp";
 
 @interface AppDelegate () <NotificationServiceDelegate>
