@@ -1016,7 +1016,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.quickblox.test-samplechat-objc";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mghol.chat;
 				PRODUCT_NAME = samplechat;
 				PROVISIONING_PROFILE = "024f30fe-d849-4dd9-8458-2f50e715555a";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1129,7 +1129,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.quickblox.test-samplechat-objc";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mghol.chat;
 				PRODUCT_NAME = samplechat;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1159,7 +1159,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.quickblox.test-samplechat-objc";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mghol.chat;
 				PRODUCT_NAME = samplechat;
 				PROVISIONING_PROFILE = "024f30fe-d849-4dd9-8458-2f50e715555a";
 				TARGETED_DEVICE_FAMILY = 1;
