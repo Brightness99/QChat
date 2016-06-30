@@ -42,14 +42,15 @@ int randomIntBetween(int smallNumber, int bigNumber)
     if ([ServicesManager instance].lastActivityDate != nil) {
         [[ServicesManager instance].chatService fetchDialogsUpdatedFromDate:[ServicesManager instance].lastActivityDate andPageLimit:kDialogsPageLimit iterationBlock:^(QBResponse *response, NSArray *dialogObjects, NSSet *dialogsUsersIDs, BOOL *stop) {
             if(dialogObjects.count == 0) {
-                [self searchDialog];
+                [self searchUser];
             } else {
                 __typeof(self) strongSelf = self;
                 NSInteger index = randomIntBetween(0, (int)(dialogObjects.count));
                 [strongSelf navigateToChatViewControllerWithDialog:dialogObjects[index]];
             }
         } completionBlock:^(QBResponse *response) {
-            //
+            bool a =[ServicesManager instance].isAuthorized;
+            bool b =response.success;
             if ([ServicesManager instance].isAuthorized && response.success) {
                 [ServicesManager instance].lastActivityDate = [NSDate date];
             }
@@ -59,7 +60,7 @@ int randomIntBetween(int smallNumber, int bigNumber)
         [SVProgressHUD showWithStatus:NSLocalizedString(@"SA_STR_LOADING_DIALOGS", nil) maskType:SVProgressHUDMaskTypeClear];
         [[ServicesManager instance].chatService allDialogsWithPageLimit:kDialogsPageLimit extendedRequest:nil iterationBlock:^(QBResponse *response, NSArray *dialogObjects, NSSet *dialogsUsersIDs, BOOL *stop) {
             if(dialogObjects.count == 0) {
-                [self searchDialog];
+                [self searchUser];
             } else {
                 __typeof(self) strongSelf = weakSelf;
                 NSInteger index = randomIntBetween(0, (int)(dialogObjects.count));

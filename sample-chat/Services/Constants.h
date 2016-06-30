@@ -65,7 +65,7 @@ static NSString *const kPushNotificationDialogMessageKey = @"message";
 /**
  * Online/Away(offline) time interval
 */
-static int const onlineTimeInterval = 600;  // ms
+static int const onlineTimeInterval = 1800;  // s
 static NSString *const adminLogin = @"brightnesst99@gmail.com";     //******* for test.
 
 #endif

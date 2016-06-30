@@ -98,10 +98,13 @@
         
         [QBRequest signUp:user successBlock:^(QBResponse *response, QBUUser *user) {
             [QBRequest logInWithUserLogin:username password:password successBlock:^(QBResponse *response, QBUUser *user) {
+                
+                [SVProgressHUD dismiss];
                 __typeof(self) strongSelf = weakSelf;
                 [strongSelf registerForRemoteNotifications];
                 if (servicesManager.notificationService.pushDialogID == nil) {
                     //[self getUserAndGotoChatView];
+                    
                     [strongSelf performSegueWithIdentifier:kGotoFindingUserIdentifier sender:nil];
                 }
                 else {
@@ -122,6 +125,7 @@
          {
              if (success)
              {
+                 [SVProgressHUD dismiss];
                  __typeof(self) strongSelf = weakSelf;
                  [strongSelf registerForRemoteNotifications];
                  if (servicesManager.notificationService.pushDialogID == nil) {

@@ -944,6 +944,14 @@ QMChatCellDelegate
 }
 
 - (IBAction)leaveDialog:(id)sender {
-    [self navigateToFindUserViewController:nil];
+    [self dismissViewControllerAnimated:true completion:nil];
+    /*
+    [QBRequest deleteDialogsWithIDs:[NSSet setWithObject:self.dialog.ID ] forAllUsers:NO
+                       successBlock:^(QBResponse *response, NSArray *deletedObjectsIDs, NSArray *notFoundObjectsIDs, NSArray *wrongPermissionsObjectsIDs) {
+                           
+                       } errorBlock:^(QBResponse *response) {
+                           
+                       }];
+    */
 }
 @end
