@@ -9,6 +9,7 @@
 #import "SelectGenderViewController.h"
 #import "ServicesManager.h"
 #import "AppDelegate.h"
+#import "FindingUserViewController.h"
 #import "DialogsViewController.h"
 #import "ChatViewController.h"
 
@@ -36,6 +37,7 @@
     //self.user = nil;
     _gender = @"female";
     [self setStyle];
+    [self getEmailFromUDID];
     // Do any additional setup after loading the view.
 }
 
@@ -80,9 +82,9 @@
 
 - (IBAction)startBtnClick:(id)sender {
     __weak __typeof(self)weakSelf = self;
-    NSString *username = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    NSString *password = @"My@12345678";    //it is formal password
-    NSString *email = @"Test@gmail.com";    // it is formal email
+    NSString *username = [self getUserName];       //[[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSString *password = @"My@12345678";           //it is formal password
+    NSString *email = [self getEmailFromUDID];     // it is formal email
     ServicesManager *servicesManager = [ServicesManager instance];
     
     if (weakSelf.user == nil) {
@@ -93,41 +95,38 @@
         user.customData = _gender;
         
         
-        [SVProgressHUD showWithStatus:@"Signing up"];
+        [SVProgressHUD showWithStatus:@"SignUp and LogIn..."];
         
         [QBRequest signUp:user successBlock:^(QBResponse *response, QBUUser *user) {
             [QBRequest logInWithUserLogin:username password:password successBlock:^(QBResponse *response, QBUUser *user) {
                 __typeof(self) strongSelf = weakSelf;
                 [strongSelf registerForRemoteNotifications];
-                [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"SA_STR_LOGGED_IN", nil)];
-                
                 if (servicesManager.notificationService.pushDialogID == nil) {
-                    [strongSelf performSegueWithIdentifier:kGoToDialogsSegueIdentifier sender:nil];
+                    //[self getUserAndGotoChatView];
+                    [strongSelf performSegueWithIdentifier:kGotoFindingUserIdentifier sender:nil];
                 }
                 else {
                     [servicesManager.notificationService handlePushNotificationWithDelegate:self];
                 }
                 
             } errorBlock:^(QBResponse *response) {
-                [SVProgressHUD showErrorWithStatus:@"Login error"];
+                [SVProgressHUD showErrorWithStatus:@"LogIn error"];
             }];
             
         } errorBlock:^(QBResponse *response) {
-            [SVProgressHUD showErrorWithStatus:@"Signup error"];
+            [SVProgressHUD showErrorWithStatus:@"SignUp error"];
         }];
     } else {
         weakSelf.user.password = password;
-        [SVProgressHUD showWithStatus:@"Login"];
+        [SVProgressHUD showWithStatus:@"LogIn"];
         [ServicesManager.instance logInWithUser:weakSelf.user completion:^(BOOL success, NSString *errorMessage)
          {
              if (success)
              {
                  __typeof(self) strongSelf = weakSelf;
                  [strongSelf registerForRemoteNotifications];
-                 [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"SA_STR_LOGGED_IN", nil)];
-                 
                  if (servicesManager.notificationService.pushDialogID == nil) {
-                     [strongSelf performSegueWithIdentifier:kGoToDialogsSegueIdentifier sender:nil];
+                     [strongSelf performSegueWithIdentifier:kGotoFindingUserIdentifier sender:nil];
                  }
                  else {
                      [servicesManager.notificationService handlePushNotificationWithDelegate:self];
@@ -142,6 +141,34 @@
     
 }
 
+- (NSString *) getEmailFromUDID {
+    
+    NSString *emailString = nil;
+    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    udid = [udid stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    emailString = [NSString stringWithFormat:@"%@@dummy.com", udid];
+    return emailString;
+    
+}
+
+- (NSString *) getUserName {
+    
+    NSString *udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    udid = [udid stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    return udid;
+}
+
+/*
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:kGotoFindingUserIdentifier]) {
+        FindingUserViewController *vc = segue.destinationViewController;
+        vc.stranger = sender;
+    }
+}
+- (void)navigateToFindingUserViewController:(QBUUser *)stranger {
+    [self performSegueWithIdentifier:kGotoFindingUserIdentifier sender:stranger];
+}
+*/
 
 #pragma mark - NotificationServiceDelegate protocol
 

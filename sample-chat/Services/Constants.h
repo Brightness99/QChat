@@ -51,11 +51,21 @@ static NSString *const kGoToAddOccupantsSegueIdentifier = @"goToAddOccupants";
  *  EditDialogTableViewController
  */
 static NSString *const kGoToChatSegueIdentifier = @"goToChat";
+/**
+ *  FindingUserViewController
+ */
+static NSString *const kGotoFindingUserIdentifier = @"goToFindStranger";
 
 /**
  * Dialog keys
  */
 static NSString *const kPushNotificationDialogIdentifierKey = @"dialog_id";
 static NSString *const kPushNotificationDialogMessageKey = @"message";
+
+/**
+ * Online/Away(offline) time interval
+*/
+static int const onlineTimeInterval = 600;  // ms
+static NSString *const adminLogin = @"brightnesst99@gmail.com";     //******* for test.
 
 #endif

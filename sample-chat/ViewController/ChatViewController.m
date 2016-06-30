@@ -68,7 +68,7 @@ QMChatCellDelegate
 }
 
 - (NSString *)senderDisplayName {
-    return [QBSession currentSession].currentUser.fullName;
+    return [QBSession currentSession].currentUser.fullName ? [QBSession currentSession].currentUser.fullName : [QBSession currentSession].currentUser.login;
 }
 
 - (CGFloat)heightForSectionHeader {

@@ -58,6 +58,7 @@
 		42583AFB1D179828002E3B8E /* QMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42583AD21D179828002E3B8E /* QMImageView.m */; };
 		42583AFC1D179828002E3B8E /* QMChatContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42583AD51D179828002E3B8E /* QMChatContainerView.m */; };
 		42583AFD1D179828002E3B8E /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 42583AD61D179828002E3B8E /* README.md */; };
+		4272103F1D23B98500E49442 /* FindingUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4272103E1D23B98500E49442 /* FindingUserViewController.m */; };
 		86104A1E1B0B5E1900464D52 /* ServicesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 86104A1D1B0B5E1900464D52 /* ServicesManager.m */; };
 		8614B8DD1B8205D400DBB753 /* UsersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8614B8DC1B8205D400DBB753 /* UsersDataSource.m */; };
 		8614B8E41B82060000DBB753 /* UIAlertDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 8614B8E11B82060000DBB753 /* UIAlertDialog.m */; };
@@ -184,6 +185,8 @@
 		42583AD41D179828002E3B8E /* QMChatContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMChatContainerView.h; sourceTree = "<group>"; };
 		42583AD51D179828002E3B8E /* QMChatContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMChatContainerView.m; sourceTree = "<group>"; };
 		42583AD61D179828002E3B8E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4272103D1D23B98500E49442 /* FindingUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindingUserViewController.h; sourceTree = "<group>"; };
+		4272103E1D23B98500E49442 /* FindingUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindingUserViewController.m; sourceTree = "<group>"; };
 		75A6E3802B49588F5660BED0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		86104A1C1B0B5E1900464D52 /* ServicesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicesManager.h; sourceTree = "<group>"; };
 		86104A1D1B0B5E1900464D52 /* ServicesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicesManager.m; sourceTree = "<group>"; };
@@ -671,6 +674,8 @@
 				86EE31B61B270B7F00B8A383 /* DialogInfoTableViewController.m */,
 				425839FA1D17120E002E3B8E /* SelectGenderViewController.h */,
 				425839FB1D17120E002E3B8E /* SelectGenderViewController.m */,
+				4272103D1D23B98500E49442 /* FindingUserViewController.h */,
+				4272103E1D23B98500E49442 /* FindingUserViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -883,6 +888,7 @@
 				86104A1E1B0B5E1900464D52 /* ServicesManager.m in Sources */,
 				42583AE81D179828002E3B8E /* QMChatCell.m in Sources */,
 				42583AE61D179828002E3B8E /* QMChatAttachmentOutgoingCell.m in Sources */,
+				4272103F1D23B98500E49442 /* FindingUserViewController.m in Sources */,
 				42583AF21D179828002E3B8E /* QMChatCollectionViewFlowLayout.m in Sources */,
 				42583AFB1D179828002E3B8E /* QMImageView.m in Sources */,
 				42583AF41D179828002E3B8E /* QMChatCollectionView.m in Sources */,

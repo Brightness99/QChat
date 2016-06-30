@@ -49,8 +49,6 @@ QMChatConnectionDelegate
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-    
-   
 	[self.tableView reloadData];
 }
 
@@ -112,7 +110,7 @@ QMChatConnectionDelegate
     }
     else {
         [SVProgressHUD showWithStatus:NSLocalizedString(@"SA_STR_LOADING_DIALOGS", nil) maskType:SVProgressHUDMaskTypeClear];
-        [[ServicesManager instance].chatService allDialogsWithPageLimit:kDialogsPageLimit extendedRequest:nil iterationBlock:^(QBResponse *response, NSArray *dialogObjects, NSSet *dialogsUsersIDs, BOOL *stop) {
+        [[ServicesManager instance].chatService allDialogsWithPageLimit:kDialogsPageLimit extendedRequest:nil iterationBlock:^(QBResponse *response, NSArray *dialogObjects, NSSet *dialogsUsersIDs, BOOL *stop) {       
             [weakSelf.tableView reloadData];
         } completion:^(QBResponse *response) {
             if ([ServicesManager instance].isAuthorized) {
