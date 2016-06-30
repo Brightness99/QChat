@@ -10,6 +10,7 @@
 #import "DialogInfoTableViewController.h"
 #import "LoginTableViewController.h"
 #import "DialogsViewController.h"
+#import "FindingUserViewController.h"
 #import "MessageStatusStringBuilder.h"
 #import "ServicesManager.h"
 
@@ -180,11 +181,21 @@ QMChatCellDelegate
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
+    /*
     if ([segue.identifier isEqualToString:@"kShowDialogInfoViewController"]) {
         DialogInfoTableViewController *viewController = segue.destinationViewController;
         viewController.dialog = self.dialog;
     }
+     */
+    if ([segue.identifier isEqualToString:@"kGotoFindingUserIdentifier"]) {
+        //delete dialog
+    }
+    
+}
+
+- (void)navigateToFindUserViewController:(QBChatDialog *)dialog {
+    //delete dialog
+    [self performSegueWithIdentifier:kGotoFindingUserIdentifier sender:nil];
 }
 
 - (void)updateTitle {
@@ -932,4 +943,7 @@ QMChatCellDelegate
     return resizedImage;
 }
 
+- (IBAction)leaveDialog:(id)sender {
+    [self navigateToFindUserViewController:nil];
+}
 @end

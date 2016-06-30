@@ -11,6 +11,7 @@
 
 @interface ChatViewController : QMChatViewController
 
+- (IBAction)leaveDialog:(id)sender;
 @property (nonatomic, strong) QBChatDialog *dialog;
 
 @end

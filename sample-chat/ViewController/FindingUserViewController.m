@@ -21,7 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _pageNo = 0;
-    [self searchUser];
+    [self searchDialog];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,6 +34,49 @@ int randomIntBetween(int smallNumber, int bigNumber)
 {
     float diff = (float)(bigNumber - smallNumber);
     return (int)(((float) rand() / RAND_MAX) * diff) + smallNumber;
+}
+
+- (void) searchDialog {
+    __weak __typeof(self) weakSelf = self;
+    
+    if ([ServicesManager instance].lastActivityDate != nil) {
+        [[ServicesManager instance].chatService fetchDialogsUpdatedFromDate:[ServicesManager instance].lastActivityDate andPageLimit:kDialogsPageLimit iterationBlock:^(QBResponse *response, NSArray *dialogObjects, NSSet *dialogsUsersIDs, BOOL *stop) {
+            if(dialogObjects.count == 0) {
+                [self searchDialog];
+            } else {
+                __typeof(self) strongSelf = self;
+                NSInteger index = randomIntBetween(0, (int)(dialogObjects.count));
+                [strongSelf navigateToChatViewControllerWithDialog:dialogObjects[index]];
+            }
+        } completionBlock:^(QBResponse *response) {
+            //
+            if ([ServicesManager instance].isAuthorized && response.success) {
+                [ServicesManager instance].lastActivityDate = [NSDate date];
+            }
+        }];
+    }
+    else {
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"SA_STR_LOADING_DIALOGS", nil) maskType:SVProgressHUDMaskTypeClear];
+        [[ServicesManager instance].chatService allDialogsWithPageLimit:kDialogsPageLimit extendedRequest:nil iterationBlock:^(QBResponse *response, NSArray *dialogObjects, NSSet *dialogsUsersIDs, BOOL *stop) {
+            if(dialogObjects.count == 0) {
+                [self searchDialog];
+            } else {
+                __typeof(self) strongSelf = weakSelf;
+                NSInteger index = randomIntBetween(0, (int)(dialogObjects.count));
+                [strongSelf navigateToChatViewControllerWithDialog:dialogObjects[index]];
+            }
+        } completion:^(QBResponse *response) {
+            if ([ServicesManager instance].isAuthorized) {
+                if (response.success) {
+                    [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"SA_STR_COMPLETED", nil)];
+                    [ServicesManager instance].lastActivityDate = [NSDate date];
+                }
+                else {
+                    [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"SA_STR_FAILED_LOAD_DIALOGS", nil)];
+                }
+            }
+        }];
+    }
 }
 
 - (void) searchUser {
@@ -118,7 +161,7 @@ int randomIntBetween(int smallNumber, int bigNumber)
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'+02'"];
     NSString *localDateString = [dateFormatter stringFromDate:date];
     NSMutableDictionary *filters = [NSMutableDictionary dictionary];
-    //filters[@"filter[]"] = [NSString stringWithFormat: @"date last_request_at gt %@",localDateString];  // filter users whose active time is less than 10 mins.
+    filters[@"filter[]"] = [NSString stringWithFormat: @"date last_request_at gt %@",localDateString];  // filter users whose active time is less than 10 mins.
     return filters;
 }
 

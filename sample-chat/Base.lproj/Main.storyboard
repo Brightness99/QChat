@@ -206,16 +206,19 @@
                         <barButtonItem key="rightBarButtonItem" image="next_page" id="fVr-Jp-ag1">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="afJ-Up-tW1" kind="show" identifier="kShowDialogInfoViewController" id="WdW-f3-Bob"/>
+                                <action selector="leaveDialog:" destination="1Ve-9p-jH0" id="6OJ-Oe-CHD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <segue destination="Tiy-EJ-shN" kind="show" identifier="goToFindStranger" id="x3n-it-v0z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2d6-vg-kVT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2170.5" y="625.5"/>
+            <point key="canvasLocation" x="2136.5" y="625.5"/>
         </scene>
         <!--Dialog Info-->
         <scene sceneID="9Ro-xm-mDg">
@@ -292,10 +295,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U6D-eC-kZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2639.5" y="625.5"/>
+            <point key="canvasLocation" x="2727.5" y="612.5"/>
         </scene>
         <!--Chat Rooms-->
         <scene sceneID="JZN-L0-ZFS">
@@ -346,20 +350,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OCD-pg-pYs">
-                                <rect key="frame" x="110" y="575" width="154" height="60"/>
-                                <color key="backgroundColor" red="0.98039215686274506" green="0.73333333333333328" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="3vc-sE-mpO"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Start Chat!">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="startBtnClick:" destination="fhn-GM-5u0" eventType="touchUpInside" id="Erm-nt-fQh"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M4Z-04-uWV">
                                 <rect key="frame" x="20" y="455" width="335" height="60"/>
                                 <subviews>
@@ -401,6 +391,20 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OCD-pg-pYs">
+                                <rect key="frame" x="110" y="575" width="154" height="60"/>
+                                <color key="backgroundColor" red="0.98039215686274506" green="0.73333333333333328" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="3vc-sE-mpO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Start Chat!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startBtnClick:" destination="fhn-GM-5u0" eventType="touchUpInside" id="Erm-nt-fQh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -446,17 +450,17 @@
                         <viewControllerLayoutGuide type="bottom" id="qNo-Pb-PEX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5Jd-zK-4RL">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="yYI-mI-ir6">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="yYI-mI-ir6">
                                 <rect key="frame" x="78" y="74" width="218" height="126"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="126" id="9a1-2A-7j6"/>
                                     <constraint firstAttribute="width" constant="218" id="fhN-q1-X6m"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finding another stranger.." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Byr-yI-LnM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Finding another stranger.." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Byr-yI-LnM">
                                 <rect key="frame" x="94" y="255" width="187" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
@@ -869,6 +873,7 @@
         <image name="user" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Zbl-vY-jcZ"/>
+        <segue reference="YNz-uw-7LO"/>
+        <segue reference="x3n-it-v0z"/>
     </inferredMetricsTieBreakers>
 </document>

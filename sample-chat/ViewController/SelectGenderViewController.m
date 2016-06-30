@@ -37,7 +37,6 @@
     //self.user = nil;
     _gender = @"female";
     [self setStyle];
-    [self getEmailFromUDID];
     // Do any additional setup after loading the view.
 }
 
