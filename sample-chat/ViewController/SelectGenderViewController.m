@@ -87,33 +87,34 @@
     ServicesManager *servicesManager = [ServicesManager instance];
     
     if (weakSelf.user == nil) {
-        QBUUser *user = [QBUUser new];
-        user.login = username;
-        user.password = password;
-        user.email = email;
-        user.customData = _gender;
+        QBUUser *loginUser = [QBUUser new];
+        loginUser.login = username;
+        loginUser.password = password;
+        loginUser.email = email;
+        loginUser.customData = _gender;
         
         
         [SVProgressHUD showWithStatus:@"SignUp and LogIn..."];
         
-        [QBRequest signUp:user successBlock:^(QBResponse *response, QBUUser *user) {
-            [QBRequest logInWithUserLogin:username password:password successBlock:^(QBResponse *response, QBUUser *user) {
-                
-                [SVProgressHUD dismiss];
-                __typeof(self) strongSelf = weakSelf;
-                [strongSelf registerForRemoteNotifications];
-                if (servicesManager.notificationService.pushDialogID == nil) {
-                    //[self getUserAndGotoChatView];
-                    
-                    [strongSelf performSegueWithIdentifier:kGotoFindingUserIdentifier sender:nil];
-                }
-                else {
-                    [servicesManager.notificationService handlePushNotificationWithDelegate:self];
-                }
-                
-            } errorBlock:^(QBResponse *response) {
-                [SVProgressHUD showErrorWithStatus:@"LogIn error"];
-            }];
+        [QBRequest signUp:loginUser successBlock:^(QBResponse *response, QBUUser *user) {
+            [ServicesManager.instance.authService logInWithUser:loginUser completion:^(QBResponse *response, QBUUser * profile)
+            {
+                    if(response.success) {
+                        __typeof(self) strongSelf = weakSelf;
+                        bool a = servicesManager.isAuthorized;
+                        [strongSelf registerForRemoteNotifications];
+                        if (servicesManager.notificationService.pushDialogID == nil) {
+                            //[self getUserAndGotoChatView];
+                            [strongSelf performSegueWithIdentifier:kGotoFindingUserIdentifier sender:nil];
+                        }
+                        else {
+                            [servicesManager.notificationService handlePushNotificationWithDelegate:self];
+                        }
+                    } else {
+                        [SVProgressHUD showErrorWithStatus:@"LogIn error"];
+                    }
+                }];
+ 
             
         } errorBlock:^(QBResponse *response) {
             [SVProgressHUD showErrorWithStatus:@"SignUp error"];
@@ -125,7 +126,6 @@
          {
              if (success)
              {
-                 [SVProgressHUD dismiss];
                  __typeof(self) strongSelf = weakSelf;
                  [strongSelf registerForRemoteNotifications];
                  if (servicesManager.notificationService.pushDialogID == nil) {

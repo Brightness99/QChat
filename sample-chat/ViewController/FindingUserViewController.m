@@ -12,16 +12,40 @@
 
 
 @interface FindingUserViewController ()
+<
+QMChatServiceDelegate,
+QMAuthServiceDelegate,
+QMChatConnectionDelegate
+>
 
+@property (nonatomic, strong) id <NSObject> observerDidBecomeActive;
 @end
 
 @implementation FindingUserViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+   
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    // calling awakeFromNib due to viewDidLoad not being called by instantiateViewControllerWithIdentifier
+    [[ServicesManager instance].chatService addDelegate:self];
+    self.observerDidBecomeActive = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification
+                                                                                     object:nil queue:[NSOperationQueue mainQueue]
+                                                                                 usingBlock:^(NSNotification *note) {
+                                                                                     if (![[QBChat instance] isConnected]) {
+                                                                                         [SVProgressHUD showWithStatus:NSLocalizedString(@"SA_STR_CONNECTING_TO_CHAT", nil) maskType:SVProgressHUDMaskTypeClear];
+                                                                                     }
+                                                                                 }];
+    ServicesManager *ins = [ServicesManager instance];
+    bool a = [ServicesManager instance].isAuthorized;
+    if ([ServicesManager instance].isAuthorized) {
+        [self searchDialog];
+    }
     _pageNo = 0;
-    [self searchDialog];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,7 +81,7 @@ int randomIntBetween(int smallNumber, int bigNumber)
         }];
     }
     else {
-        [SVProgressHUD showWithStatus:NSLocalizedString(@"SA_STR_LOADING_DIALOGS", nil) maskType:SVProgressHUDMaskTypeClear];
+        //[SVProgressHUD showWithStatus:NSLocalizedString(@"SA_STR_LOADING_DIALOGS", nil) maskType:SVProgressHUDMaskTypeClear];
         [[ServicesManager instance].chatService allDialogsWithPageLimit:kDialogsPageLimit extendedRequest:nil iterationBlock:^(QBResponse *response, NSArray *dialogObjects, NSSet *dialogsUsersIDs, BOOL *stop) {
             if(dialogObjects.count == 0) {
                 [self searchUser];
