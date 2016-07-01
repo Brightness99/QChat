@@ -15,7 +15,8 @@
 <
 QMChatServiceDelegate,
 QMAuthServiceDelegate,
-QMChatConnectionDelegate
+QMChatConnectionDelegate,
+NotificationServiceDelegate
 >
 
 @property (nonatomic, strong) id <NSObject> observerDidBecomeActive;
@@ -25,7 +26,7 @@ QMChatConnectionDelegate
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+   [[ServicesManager instance].notificationService handlePushNotificationWithDelegate:self];
 }
 
 - (void)awakeFromNib {
@@ -40,7 +41,8 @@ QMChatConnectionDelegate
                                                                                          [SVProgressHUD showWithStatus:NSLocalizedString(@"SA_STR_CONNECTING_TO_CHAT", nil) maskType:SVProgressHUDMaskTypeClear];
                                                                                      }
                                                                                  }];
-
+    __weak __typeof(self) weakSelf = self;
+    [[ServicesManager instance].notificationService handlePushNotificationWithDelegate:weakSelf];
     if ([ServicesManager instance].isAuthorized) {
         [self searchDialog];
     }
@@ -67,7 +69,7 @@ int randomIntBetween(int smallNumber, int bigNumber)
             if(dialogObjects.count == 0) {
                 [self searchUser];
             } else {
-                __typeof(self) strongSelf = self;
+                __typeof(self) strongSelf = weakSelf;
                 NSInteger index = randomIntBetween(0, (int)(dialogObjects.count));
                 bool a = [[QBChat instance] isConnected];
                 
@@ -161,7 +163,6 @@ int randomIntBetween(int smallNumber, int bigNumber)
                 if( dialog != nil ) {
                     NSArray *strangerArray = [NSArray arrayWithObject:stranger];
                     [[ServicesManager instance].usersService.usersMemoryStorage addUsers:strangerArray];
-                    bool a = [[QBChat instance] isConnected];
                     [strongSelf navigateToChatViewControllerWithDialog:dialog];
                 }
                 else {
