@@ -126,8 +126,6 @@
                 [servicesManager logInWithUser:servicesManager.currentUser completion:^(BOOL success, NSString * _Nullable errorMessage) {
                     if(success) {
                         __typeof(self) strongSelf = weakSelf;
-                        QBUUser *a = servicesManager.currentUser;
-                        bool b = servicesManager.isAuthorized;
                         [strongSelf registerForRemoteNotifications];
                         if (servicesManager.notificationService.pushDialogID == nil) {
                             //[self getUserAndGotoChatView];

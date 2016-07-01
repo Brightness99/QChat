@@ -281,6 +281,32 @@ int randomIntBetween(int smallNumber, int bigNumber)
     
 }
 
+#pragma mark - NotificationServiceDelegate protocol
+
+- (void)notificationServiceDidStartLoadingDialogFromServer {
+    
+}
+
+- (void)notificationServiceDidFinishLoadingDialogFromServer {
+    
+}
+
+- (void)notificationServiceDidSucceedFetchingDialog:(QBChatDialog *)chatDialog {
+    /*
+    ChatViewController *chatController = (ChatViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+    chatController.dialog = chatDialog;
+    
+    self.navigationController.viewControllers = @[chatController];
+     */
+    [self navigateToChatViewControllerWithDialog:chatDialog];
+}
+
+- (void)notificationServiceDidFailFetchingDialog {
+    // TODO: maybe segue class should be ReplaceSegue?
+    //[self performSegueWithIdentifier:kGoToDialogsSegueIdentifier sender:nil];
+}
+
+
 #pragma mark - QMChatConnectionDelegate
 
 - (void)chatServiceChatDidConnect:(QMChatService *)chatService {
