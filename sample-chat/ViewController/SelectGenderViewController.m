@@ -93,12 +93,18 @@
         loginUser.email = email;
         loginUser.customData = _gender;
         
-        [SVProgressHUD showWithStatus:@"SignUp and LogIn..."];
+        [SVProgressHUD showWithStatus:@"SignUp..."];
         
+        /*
         [servicesManager.authService signUpAndLoginWithUser:loginUser completion:^(QBResponse *response, QBUUser * profile) {
             if(response.success) {
                 __typeof(self) strongSelf = weakSelf;
-                bool a = servicesManager.isAuthorized;
+                QBUUser *a = servicesManager.currentUser;
+                if(!([QBChat instance].isConnected)) {
+                    [QBSettings setAutoReconnectEnabled:YES];
+                    [[QBChat instance] connectWithUser:servicesManager.currentUser completion:nil];
+                }
+                bool b = [QBChat instance].isConnected;
                 [strongSelf registerForRemoteNotifications];
                 if (servicesManager.notificationService.pushDialogID == nil) {
                     //[self getUserAndGotoChatView];
@@ -111,11 +117,63 @@
                 [SVProgressHUD showErrorWithStatus:@"SignUp and LogIn..."];
             }
         }];
+         */
+        NSArray *strangerArray = [NSArray arrayWithObject:loginUser];
+        [[ServicesManager instance].usersService.usersMemoryStorage addUsers:strangerArray];
+        [servicesManager.authService signUpAndLoginWithUser:loginUser completion:^(QBResponse * _Nonnull response, QBUUser * _Nullable userProfile) {
+            if(response.success) {
+                [SVProgressHUD showWithStatus:@"LogIn..."];
+                [servicesManager logInWithUser:servicesManager.currentUser completion:^(BOOL success, NSString * _Nullable errorMessage) {
+                    if(success) {
+                        __typeof(self) strongSelf = weakSelf;
+                        QBUUser *a = servicesManager.currentUser;
+                        bool b = servicesManager.isAuthorized;
+                        [strongSelf registerForRemoteNotifications];
+                        if (servicesManager.notificationService.pushDialogID == nil) {
+                            //[self getUserAndGotoChatView];
+                            [strongSelf performSegueWithIdentifier:kGotoFindingUserIdentifier sender:nil];
+                        }
+                        else {
+                            [servicesManager.notificationService handlePushNotificationWithDelegate:self];
+                        }
+                    } else {
+                        [SVProgressHUD showErrorWithStatus:@"LogIn error"];
+                    }
+                }];
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"SignUp error"];
+            }
+        }];
+        /*
+        [QBRequest signUp:loginUser successBlock:^(QBResponse * _Nonnull response, QBUUser * _Nullable user) {
+            [SVProgressHUD showWithStatus:@"LogIn..."];
+            bool b = servicesManager.isAuthorized;
+            [servicesManager logInWithUser:servicesManager.currentUser completion:^(BOOL success, NSString * _Nullable errorMessage) {
+                if(success) {
+                    __typeof(self) strongSelf = weakSelf;
+                    QBUUser *a = servicesManager.currentUser;
+                    bool b = servicesManager.isAuthorized;
+                    [strongSelf registerForRemoteNotifications];
+                    if (servicesManager.notificationService.pushDialogID == nil) {
+                        //[self getUserAndGotoChatView];
+                        [strongSelf performSegueWithIdentifier:kGotoFindingUserIdentifier sender:nil];
+                    }
+                    else {
+                        [servicesManager.notificationService handlePushNotificationWithDelegate:self];
+                    }
+                } else {
+                    [SVProgressHUD showErrorWithStatus:@"LogIn error"];
+                }
+            }];
+        } errorBlock:^(QBResponse * _Nonnull response) {
+            [SVProgressHUD showErrorWithStatus:@"SignUp error"];
+        }];
+        */
         
     } else {
         weakSelf.user.password = password;
         [SVProgressHUD showWithStatus:@"LogIn"];
-        [ServicesManager.instance logInWithUser:weakSelf.user completion:^(BOOL success, NSString *errorMessage)
+        [servicesManager logInWithUser:weakSelf.user completion:^(BOOL success, NSString *errorMessage)
          {
              if (success)
              {
