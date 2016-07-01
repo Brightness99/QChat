@@ -32,6 +32,8 @@ NSString *const kAccountKey     = @"7yvNe17TnjNUqDoPwfqp";
     [QBSettings setAccountKey:kAccountKey];
     [QBSettings setChatDNSLookupCacheEnabled:YES];
     
+    [QBSettings setLogLevel: QBLogLevelDebug];
+    
     // enabling carbons for chat
     [QBSettings setCarbonsEnabled:YES];
     

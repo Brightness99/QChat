@@ -40,8 +40,7 @@ QMChatConnectionDelegate
                                                                                          [SVProgressHUD showWithStatus:NSLocalizedString(@"SA_STR_CONNECTING_TO_CHAT", nil) maskType:SVProgressHUDMaskTypeClear];
                                                                                      }
                                                                                  }];
-    ServicesManager *ins = [ServicesManager instance];
-    bool a = [ServicesManager instance].isAuthorized;
+
     if ([ServicesManager instance].isAuthorized) {
         [self searchDialog];
     }
@@ -70,11 +69,11 @@ int randomIntBetween(int smallNumber, int bigNumber)
             } else {
                 __typeof(self) strongSelf = self;
                 NSInteger index = randomIntBetween(0, (int)(dialogObjects.count));
+                bool a = [[QBChat instance] isConnected];
+                
                 [strongSelf navigateToChatViewControllerWithDialog:dialogObjects[index]];
             }
         } completionBlock:^(QBResponse *response) {
-            bool a =[ServicesManager instance].isAuthorized;
-            bool b =response.success;
             if ([ServicesManager instance].isAuthorized && response.success) {
                 [ServicesManager instance].lastActivityDate = [NSDate date];
             }
@@ -88,6 +87,8 @@ int randomIntBetween(int smallNumber, int bigNumber)
             } else {
                 __typeof(self) strongSelf = weakSelf;
                 NSInteger index = randomIntBetween(0, (int)(dialogObjects.count));
+                bool a = [[QBChat instance] isConnected];
+                
                 [strongSelf navigateToChatViewControllerWithDialog:dialogObjects[index]];
             }
         } completion:^(QBResponse *response) {
@@ -160,6 +161,7 @@ int randomIntBetween(int smallNumber, int bigNumber)
                 if( dialog != nil ) {
                     NSArray *strangerArray = [NSArray arrayWithObject:stranger];
                     [[ServicesManager instance].usersService.usersMemoryStorage addUsers:strangerArray];
+                    bool a = [[QBChat instance] isConnected];
                     [strongSelf navigateToChatViewControllerWithDialog:dialog];
                 }
                 else {
@@ -243,6 +245,67 @@ int randomIntBetween(int smallNumber, int bigNumber)
 - (void)navigateToChatViewControllerWithDialog:(QBChatDialog *)dialog {
     [self performSegueWithIdentifier:kGoToChatSegueIdentifier sender:dialog];
 }
+
+#pragma mark -
+#pragma mark Chat Service Delegate
+
+- (void)chatService:(QMChatService *)chatService didAddChatDialogsToMemoryStorage:(NSArray *)chatDialogs {
+    
+}
+
+- (void)chatService:(QMChatService *)chatService didAddChatDialogToMemoryStorage:(QBChatDialog *)chatDialog {
+    
+}
+
+- (void)chatService:(QMChatService *)chatService didUpdateChatDialogInMemoryStorage:(QBChatDialog *)chatDialog {
+    
+}
+
+- (void)chatService:(QMChatService *)chatService didUpdateChatDialogsInMemoryStorage:(NSArray *)dialogs {
+    
+}
+
+- (void)chatService:(QMChatService *)chatService didReceiveNotificationMessage:(QBChatMessage *)message createDialog:(QBChatDialog *)dialog {
+   
+}
+
+- (void)chatService:(QMChatService *)chatService didAddMessageToMemoryStorage:(QBChatMessage *)message forDialogID:(NSString *)dialogID {
+    
+}
+
+- (void)chatService:(QMChatService *)chatService didAddMessagesToMemoryStorage:(NSArray *)messages forDialogID:(NSString *)dialogID {
+    
+}
+
+- (void)chatService:(QMChatService *)chatService didDeleteChatDialogWithIDFromMemoryStorage:(NSString *)chatDialogID {
+    
+}
+
+#pragma mark - QMChatConnectionDelegate
+
+- (void)chatServiceChatDidConnect:(QMChatService *)chatService {
+    [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"SA_STR_CONNECTED", nil) maskType:SVProgressHUDMaskTypeClear];
+   
+}
+
+- (void)chatServiceChatDidReconnect:(QMChatService *)chatService {
+    [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"SA_STR_RECONNECTED", nil) maskType:SVProgressHUDMaskTypeClear];
+   
+}
+
+- (void)chatServiceChatDidAccidentallyDisconnect:(QMChatService *)chatService {
+    [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"SA_STR_DISCONNECTED", nil)];
+}
+
+- (void)chatService:(QMChatService *)chatService chatDidNotConnectWithError:(NSError *)error {
+    [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"SA_STR_DID_NOT_CONNECT_ERROR", nil), [error localizedDescription]]];
+}
+
+- (void)chatServiceChatDidFailWithStreamError:(NSError *)error {
+    [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"SA_STR_FAILED_TO_CONNECT_WITH_ERROR", nil), [error localizedDescription]]];
+}
+
+
 /*
 #pragma mark - Navigation
 

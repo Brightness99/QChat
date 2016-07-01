@@ -93,32 +93,25 @@
         loginUser.email = email;
         loginUser.customData = _gender;
         
-        
         [SVProgressHUD showWithStatus:@"SignUp and LogIn..."];
         
-        [QBRequest signUp:loginUser successBlock:^(QBResponse *response, QBUUser *user) {
-            [ServicesManager.instance.authService logInWithUser:loginUser completion:^(QBResponse *response, QBUUser * profile)
-            {
-                    if(response.success) {
-                        __typeof(self) strongSelf = weakSelf;
-                        bool a = servicesManager.isAuthorized;
-                        [strongSelf registerForRemoteNotifications];
-                        if (servicesManager.notificationService.pushDialogID == nil) {
-                            //[self getUserAndGotoChatView];
-                            [strongSelf performSegueWithIdentifier:kGotoFindingUserIdentifier sender:nil];
-                        }
-                        else {
-                            [servicesManager.notificationService handlePushNotificationWithDelegate:self];
-                        }
-                    } else {
-                        [SVProgressHUD showErrorWithStatus:@"LogIn error"];
-                    }
-                }];
- 
-            
-        } errorBlock:^(QBResponse *response) {
-            [SVProgressHUD showErrorWithStatus:@"SignUp error"];
+        [servicesManager.authService signUpAndLoginWithUser:loginUser completion:^(QBResponse *response, QBUUser * profile) {
+            if(response.success) {
+                __typeof(self) strongSelf = weakSelf;
+                bool a = servicesManager.isAuthorized;
+                [strongSelf registerForRemoteNotifications];
+                if (servicesManager.notificationService.pushDialogID == nil) {
+                    //[self getUserAndGotoChatView];
+                    [strongSelf performSegueWithIdentifier:kGotoFindingUserIdentifier sender:nil];
+                }
+                else {
+                    [servicesManager.notificationService handlePushNotificationWithDelegate:self];
+                }
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"SignUp and LogIn..."];
+            }
         }];
+        
     } else {
         weakSelf.user.password = password;
         [SVProgressHUD showWithStatus:@"LogIn"];
