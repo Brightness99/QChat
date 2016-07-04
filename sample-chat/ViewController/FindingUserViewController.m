@@ -19,14 +19,23 @@ QMChatConnectionDelegate,
 NotificationServiceDelegate
 >
 
+
 @property (nonatomic, strong) id <NSObject> observerDidBecomeActive;
+
 @end
 
 @implementation FindingUserViewController
+{
+    BOOL flag;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
    [[ServicesManager instance].notificationService handlePushNotificationWithDelegate:self];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    flag = true;
 }
 
 - (void)awakeFromNib {
@@ -259,7 +268,9 @@ int randomIntBetween(int smallNumber, int bigNumber)
 }
 
 - (void)chatService:(QMChatService *)chatService didUpdateChatDialogInMemoryStorage:(QBChatDialog *)chatDialog {
-    
+    __weak __typeof(self)weakSelf = self;
+    if(flag)
+        [weakSelf navigateToChatViewControllerWithDialog:chatDialog];
 }
 
 - (void)chatService:(QMChatService *)chatService didUpdateChatDialogsInMemoryStorage:(NSArray *)dialogs {
