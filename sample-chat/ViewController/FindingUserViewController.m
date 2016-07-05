@@ -253,6 +253,7 @@ int randomIntBetween(int smallNumber, int bigNumber)
 }
 
 - (void)navigateToChatViewControllerWithDialog:(QBChatDialog *)dialog {
+    flag = false;
     [self performSegueWithIdentifier:kGoToChatSegueIdentifier sender:dialog];
 }
 
@@ -310,7 +311,7 @@ int randomIntBetween(int smallNumber, int bigNumber)
     
     self.navigationController.viewControllers = @[chatController];
      */
-    [self navigateToChatViewControllerWithDialog:chatDialog];
+    //[self navigateToChatViewControllerWithDialog:chatDialog];
 }
 
 - (void)notificationServiceDidFailFetchingDialog {
@@ -323,7 +324,7 @@ int randomIntBetween(int smallNumber, int bigNumber)
 
 - (void)chatServiceChatDidConnect:(QMChatService *)chatService {
     [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"SA_STR_CONNECTED", nil) maskType:SVProgressHUDMaskTypeClear];
-   
+    
 }
 
 - (void)chatServiceChatDidReconnect:(QMChatService *)chatService {

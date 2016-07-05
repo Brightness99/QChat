@@ -193,11 +193,6 @@ QMChatCellDelegate
     
 }
 
-- (void)navigateToFindUserViewController:(QBChatDialog *)dialog {
-    //delete dialog
-    [self performSegueWithIdentifier:kGotoFindingUserIdentifier sender:nil];
-}
-
 - (void)updateTitle {
     
     if (self.dialog.type == QBChatDialogTypePrivate) {
@@ -943,14 +938,26 @@ QMChatCellDelegate
     return resizedImage;
 }
 
+- (void)deleteDialogWithID:(NSString *)dialogID {
+    __weak __typeof(self) weakSelf = self;
+    // Deleting dialog from Quickblox and cache.
+    [ServicesManager.instance.chatService deleteDialogWithID:dialogID
+                                                  completion:^(QBResponse *response) {
+                                                      if (response.success) {
+                                                          [SVProgressHUD dismiss];
+                                                          [self dismissViewControllerAnimated:true completion:nil];
+                                                      } else {
+                                                          [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"SA_STR_ERROR_DELETING", nil)];
+                                                          NSLog(@"can not delete dialog: %@", response.error);
+                                                      }
+                                                  }];
+}
+
 - (IBAction)leaveDialog:(id)sender {
     
-    [QBRequest deleteDialogsWithIDs:[NSSet setWithObject:self.dialog.ID ] forAllUsers:NO
-                       successBlock:^(QBResponse *response, NSArray *deletedObjectsIDs, NSArray *notFoundObjectsIDs, NSArray *wrongPermissionsObjectsIDs) {
-                           [self dismissViewControllerAnimated:true completion:nil];
-                       } errorBlock:^(QBResponse *response) {
-                           
-                       }];
+    [[ServicesManager instance].chatService sendNotificationMessageAboutLeavingDialog:self.dialog withNotificationText:kRemoveDialogNotification completion:^(NSError  *error) {
+        [self deleteDialogWithID:self.dialog.ID];
+    }];
     
 }
 @end
